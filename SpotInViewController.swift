@@ -11,6 +11,7 @@ import Firebase
 
 class SpotInViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     var ref: DatabaseReference!
     
@@ -52,6 +53,25 @@ class SpotInViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if (self.tableView.isEditing) {
+            return UITableViewCell.EditingStyle.delete
+        }
+        
+        return UITableViewCell.EditingStyle.none
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let person = people[indexPath.row]
+            person.ref?.removeValue()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     @IBAction func addButtonDidTouch(_ sender: Any) {
         let alert = UIAlertController(title: "New Loan",
                                       message: "Enter new money loaned.",
@@ -66,9 +86,7 @@ class SpotInViewController: UIViewController, UITableViewDelegate, UITableViewDa
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
             guard let textFieldName = alert.textFields?.first,
                 let textName = textFieldName.text else {return}
-            
-            
-            
+
             guard let textFieldAmount = alert.textFields?.last,
                 let textAmount = textFieldAmount.text else {return}
             
@@ -78,5 +96,14 @@ class SpotInViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }))
         
         self.present(alert, animated: true)
+    }
+    
+    @IBAction func didTouchEditButton(_ sender: Any) {
+        self.tableView.isEditing = !self.tableView.isEditing
+        if self.tableView.isEditing {
+            self.editButton.title = "Done"
+        } else {
+            self.editButton.title = "Edit"
+        }
     }
 }

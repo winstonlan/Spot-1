@@ -75,6 +75,11 @@
                         <viewLayoutGuide key="safeArea" id="KGb-gX-Ndv"/>
                     </view>
                     <navigationItem key="navigationItem" title="Money Loaned" id="MKE-hr-tXh">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="Ob0-yU-JJV">
+                            <connections>
+                                <action selector="didTouchEditButton:" destination="Fj1-xW-ayj" id="t7P-Je-Qtd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="kdO-l0-jJj">
                             <connections>
                                 <action selector="addButtonDidTouch:" destination="Fj1-xW-ayj" id="JdR-mk-4er"/>
@@ -82,6 +87,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="Ob0-yU-JJV" id="H45-CA-oWC"/>
                         <outlet property="tableView" destination="tJg-bL-Vt0" id="A8e-2W-rfh"/>
                     </connections>
                 </viewController>
@@ -126,11 +132,11 @@
             </objects>
             <point key="canvasLocation" x="1320.8" y="-224.6305418719212"/>
         </scene>
-        <!--Spot Out-->
+        <!--Borrowed-->
         <scene sceneID="ph2-Qf-bNG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="073-rC-5DK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Spot Out" id="yJj-a3-NyK"/>
+                    <tabBarItem key="tabBarItem" title="Borrowed" id="yJj-a3-NyK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y2p-kt-LJE">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
